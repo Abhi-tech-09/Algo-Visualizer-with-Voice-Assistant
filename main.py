@@ -77,9 +77,12 @@ def takeCommand():
         printgui("Listening ...")
         r.pause_threshold = 1
         audio = r.listen(source)
+        
 
+    print("Im here i dont know whats happening")
     try:
         printgui("Recognizing...")
+        print("Audio Recieved")
         query = r.recognize_google(audio, language="en-in")    #google is used for voice recognition
         user_said(f"User said : {query}\n")
 
@@ -109,6 +112,7 @@ def start(b):
         if b.val == True : 
             break 
         query = takeCommand().lower()
+        
 
         if 'wikipedia' in query:
             query = query.replace('wikipedia','')
@@ -125,7 +129,6 @@ def start(b):
 
         if 'a star' in query:
             speak("Ok Implementing Astar Now")
-            a.astar_main(a.WIN, WIDTH)
 
             speak("What do you want to do next?")
 
@@ -184,7 +187,7 @@ def start(b):
 
             print("Message sent !!!!!")  
         
-        if 'mail' in query : 
+        if True == True  : 
             file = open("mail.txt" , 'r')
             data = file.read()
             file.close() 
@@ -198,20 +201,19 @@ def start(b):
                 file.close()
             
             speak("Whom do you want to send the mail")
-            r = takeCommand().lower()
-            while r == "none" : 
-                speak("Please repeat")
-                r = takeCommand().lower()
+            # r = takeCommand().lower()
+            # while r == "none" : 
+            #     speak("Please repeat")
+            #     r = takeCommand().lower()
 
             file = open("mail.txt" , 'r')
             data = file.read() 
             file.seek(0) 
             mail = file.readline() 
             password = file.readline()
-            print("Mail" , mail)
-            print("password" , password)
             file.close()
-            receiver = r.split()
+            # receiver = r.split()
+            receiver = ["hamza" , "pujan"]
             
             for name in receiver : 
                 if re.search(rf"\b{name}\b",data) == None :
@@ -220,19 +222,21 @@ def start(b):
                     em = input("Enter mail : ")
                     file = open("mail.txt" , 'a')
                     file.write(f"\n{name} : {em}")
+                    file.close()
                 file = open("mail.txt" , 'r')
                 data = file.read() 
                 file.close()
+            speak("What should be the subject of Mail")
+            subject = input("Subject : ")
+            speak("Write your message : ")
+            msg = input("Message : ")
+            for name in receiver : 
                 pattern = re.findall(rf'\b{name}\s:\s\w.+\b',data)
-                print("Pattern : " , pattern)
                 mail_id = re.findall(r'\s\b\w.+\b' ,pattern[0])
                 actual = mail_id[0]
                 actual = actual[1:]
                 print(actual , "mail")
-                speak("What should be the subject of Mail")
-                subject = takeCommand()
-                speak("Write your message : ")
-                msg = input("Message : ")
+                
                 try : 
                     kit.send_mail(mail , password , subject , msg , actual)
                 except Exception as e : 
@@ -264,10 +268,6 @@ def counter(c , b) :
     print("Print cnt variable" , c.cnt)
     clicked(c , b)
 
-
-
-
-    
 
 
 bg = PhotoImage(file = "vc.png")

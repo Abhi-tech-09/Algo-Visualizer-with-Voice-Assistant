@@ -270,7 +270,7 @@ def astar_main(win, width):
                             node.update_neighbours(grid)
 
                     algorithm(lambda: draw(win, grid, ROWS, width), grid, start,end)  
-                    run = False      
+                    # run = False      
 
                 if event.key == pygame.K_c:
                     start = None
@@ -279,12 +279,12 @@ def astar_main(win, width):
 
         if flag == 1:
             print("Inside flag == 1")
-            pygame.quit()
-            break            
+            # pygame.quit()
+            # break            
 
 
     return
     #pygame.quit()   
 
-#astar_main(WIN, WIDTH)                 
+astar_main(WIN, WIDTH)                 
 

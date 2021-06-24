@@ -17,6 +17,7 @@
 ![](./Images/s2.png)
 
 * Automated task of sending mail which uses multithreading to send emails immediately to more then 100 emails which must be saved in mail.txt file
+<br>
 ![](./Images/s3.png)
 ![](./Images/s4.png)
 
